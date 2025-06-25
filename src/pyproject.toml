@@ -1,0 +1,14 @@
+[project]
+name = "crawlwise"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pocketflow>=0.0.1",
+    "crawl4ai>=0.6.3",
+    "fastapi>=0.115.13",
+    "uvicorn",
+    "requests",
+    "beautifulsoup4"
+]

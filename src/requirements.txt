@@ -1,0 +1,6 @@
+pocketflow>=0.0.1
+fastapi
+uvicorn
+crawl4ai>=0.6.3
+requests
+beautifulsoup4
