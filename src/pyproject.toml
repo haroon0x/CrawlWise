@@ -11,4 +11,5 @@ dependencies = [
     "uvicorn",
     "requests",
     "beautifulsoup4",
+    "langchain[openai]>=0.3.26",
 ]

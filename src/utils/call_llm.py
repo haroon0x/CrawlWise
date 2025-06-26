@@ -1,23 +1,23 @@
 # utils/call_llm.py
-# for Alchemyst LLM Proxy integration
+from dotenv import load_dotenv
+from langchain_openai import ChatOpenAI
 import os
-import requests
 
-def call_llm(prompt):
+def call_llm(prompt: str) -> str:
     """
-    Call the Alchemyst AI Proxy with the given prompt.
-    No OpenAI API key is needed, only the Alchemyst platform API key.
+    Call the Alchemyst AI Proxy using direct requests to the proxy.
     """
-    url = "https://platform-backend.getalchemystai.com/api/v1/proxy/default"
-    api_key = os.environ.get("ALCHEMYST_API_KEY", "your-alchemyst-api-key")
-    payload = {
-        "model": "alchemyst-ai/alchemyst-c1",
-        "messages": [{"role": "user", "content": prompt}]
-    }   
-    headers = {"Authorization": f"Bearer {api_key}"}
-    response = requests.post(url, json=payload, headers=headers, timeout=60)
-    response.raise_for_status()
-    return response.json()["choices"][0]["message"]["content"]
+    load_dotenv()
+    ALCHEMYST_API_KEY = os.environ.get("ALCHEMYST_API_KEY")
+    BASE_URL_WITH_PROXY = "https://platform-backend.getalchemystai.com/api/v1/proxy/default"
+    llm = ChatOpenAI(
+    api_key=ALCHEMYST_API_KEY,
+    model="alchemyst-ai/alchemyst-c1",
+    base_url=BASE_URL_WITH_PROXY,
+    )
+    result = llm.invoke([{"role": "user", "content": prompt}])
+    return result.content
+   
 
 if __name__ == "__main__":
     prompt = "What is the meaning of life?"
