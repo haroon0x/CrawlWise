@@ -36,26 +36,32 @@ CrawlWise is an end-to-end Generative Engine Optimization (GEO) agent system tha
 
 ## 🏗️ Architecture
 
-
 ```mermaid
-flowchart TD
-    A[User (Frontend)] -->|Submits URL| B[FastAPI Backend]
-    B --> C[Crawl4AI Crawler]
-    C --> D[Extracted Content & Metadata]
-    D --> E[PocketFlow Agent Pipeline]
-    E --> F[Audit Node<br/>(LLM via AlchemystAI)]
-    E --> G[Enhancement Node<br/>(LLM via AlchemystAI)]
-    F --> H[Audit JSON]
-    G --> I[Improvements JSON]
-    H --> J[API Response]
+flowchart LR
+    A["User (Frontend)"] --> B["FastAPI Backend"]
+    B --> C["Crawl4AI Crawler"]
+    C --> D["Extracted Content & Metadata"]
+    D --> E["PocketFlow Agent Pipeline"]
+    subgraph E ["PocketFlow Agent Pipeline"]
+        F["Audit Node (LLM via AlchemystAI)"] --> H["Audit JSON"]
+        G["Enhancement Node (LLM via AlchemystAI)"] --> I["Improvements JSON"]
+    end
+    D --> F
+    H --> G
+    H --> J["API Response"]
     I --> J
-    J -->|Display Results| A
-    F -.-> K[AlchemystAI LLM Proxy]
+    J --> A
+    F -.-> K["AlchemystAI LLM Proxy"]
     G -.-> K
 ```
 
+*User submits a URL via the frontend. The backend crawls the page, runs the PocketFlow agent pipeline (audit and enhancement nodes, both using AlchemystAI LLM), and returns results to the frontend for display.*
 
-amework:** [https://github.com/The-Pocket/PocketFlow](https://github.com/The-Pocket/PocketFlow)
+---
+
+## 🌐 Key Links
+
+- **Framework:** [https://github.com/The-Pocket/PocketFlow](https://github.com/The-Pocket/PocketFlow)
 - **AlchemystAI LLM Proxy:** [https://getalchemystai.com](https://getalchemystai.com)
 
 ---
