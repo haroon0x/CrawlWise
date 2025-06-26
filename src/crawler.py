@@ -28,4 +28,4 @@ if __name__ == "__main__":
     if url:
         print(asyncio.run(crawl(url)))
     else:
-        print("Usage: python crawler.py <url>")tr
+        print("Usage: python crawler.py <url>")
