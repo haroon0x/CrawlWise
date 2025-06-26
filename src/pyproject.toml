@@ -10,5 +10,5 @@ dependencies = [
     "fastapi>=0.115.13",
     "uvicorn",
     "requests",
-    "beautifulsoup4"
+    "beautifulsoup4",
 ]

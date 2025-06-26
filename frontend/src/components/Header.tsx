@@ -1,8 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Zap, Target, Brain } from 'lucide-react';
 
+const BACKEND_URL = '/health';
+
 const Header: React.FC = () => {
+  const [online, setOnline] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>;
+    const ping = async () => {
+      try {
+        // Use a GET request for health check
+        const res = await fetch(BACKEND_URL, { method: 'GET' });
+        setOnline(res.ok);
+      } catch {
+        setOnline(false);
+      }
+      timeout = setTimeout(ping, 10000); // ping every 10s
+    };
+    ping();
+    return () => clearTimeout(timeout);
+  }, []);
+
+  let indicatorColor = 'bg-gray-400';
+  let indicatorText = 'Checking...';
+  if (online === true) {
+    indicatorColor = 'bg-green-400';
+    indicatorText = 'Online';
+  } else if (online === false) {
+    indicatorColor = 'bg-red-400';
+    indicatorText = 'Offline';
+  }
+
   return (
     <header className="relative border-b border-white/10 bg-black/20 backdrop-blur-xl">
       <div className="container mx-auto px-4 py-6">
@@ -44,8 +74,8 @@ const Header: React.FC = () => {
             </div>
             
             <div className="flex items-center space-x-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <span className="text-xs text-gray-300 font-medium">Online</span>
+              <div className={`w-2 h-2 rounded-full ${indicatorColor} ${online === true ? 'animate-pulse' : ''}`} />
+              <span className="text-xs text-gray-300 font-medium">{indicatorText}</span>
             </div>
           </motion.div>
         </div>

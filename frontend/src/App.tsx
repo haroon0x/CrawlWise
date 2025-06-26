@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
@@ -5,6 +6,8 @@ import AuditForm from './components/AuditForm';
 import ResultsDisplay from './components/ResultsDisplay';
 import LoadingState from './components/LoadingState';
 import { AuditRequest, AuditResponse } from './types';
+
+const API_URL = import.meta.env.VITE_API_URL || '/api/v1/audit';
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -17,7 +20,7 @@ function App() {
     setResults(null);
 
     try {
-      const response = await fetch('http://localhost:8000/api/v1/audit', {
+      const response = await fetch(API_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

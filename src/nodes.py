@@ -3,14 +3,31 @@ from utils.call_llm import call_llm
 import asyncio
 from crawler import crawl
 
+# Helper to run async code from sync context, even if already in an event loop
+def run_async(coro):
+    try:
+        loop = asyncio.get_running_loop()
+    except RuntimeError:
+        loop = None
+    if loop and loop.is_running():
+        # If already in an event loop, run in a new thread
+        import threading
+        result = []
+        def runner():
+            result.append(asyncio.run(coro))
+        t = threading.Thread(target=runner)
+        t.start()
+        t.join()
+        return result[0]
+    else:
+        return asyncio.run(coro)
+
 class CrawlExtractNode(Node):
     def prep(self, shared):
         return shared["url"]
 
     def exec(self, url):
-        # Use the async crawl function from crawler.py
-        result = asyncio.run(crawl(url))
-        # Assume result is a dict with 'markdown' and 'meta' keys
+        result = run_async(crawl(url))
         fit_markdown = result["markdown"]
         meta = result.get("meta", {})
         return {"fit_markdown": fit_markdown, "meta": meta}

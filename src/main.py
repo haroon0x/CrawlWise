@@ -1,12 +1,23 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
+from typing import Literal
 from flow import create_crawlwise_flow
 import uvicorn
 
 app = FastAPI()
 
+# CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "*"],  # Allow frontend dev and all for dev
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 class AuditRequest(BaseModel):
-    agent: str = Field("seo", const=True)
+    agent: Literal['seo'] = 'seo'
     url: str
     keywords: list[str] = []
     tone: str = "professional"
@@ -14,6 +25,10 @@ class AuditRequest(BaseModel):
 class AuditResponse(BaseModel):
     audit: dict
     improvements: dict
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
 
 @app.post("/api/v1/audit", response_model=AuditResponse)
 def audit_endpoint(request: AuditRequest):
