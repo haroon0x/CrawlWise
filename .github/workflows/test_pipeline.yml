@@ -9,6 +9,8 @@ on:
 jobs:
   test-pipeline:
     runs-on: ubuntu-latest
+    env:
+      ALCHEMYST_API_KEY: ${{ secrets.ALCHEMYST_API_KEY }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
