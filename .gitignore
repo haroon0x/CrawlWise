@@ -1,2 +1,101 @@
 node_modules/
 .env
+.venv
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pdb
+*.egg-info/
+*.egg
+*.log
+*.sqlite3
+*.db
+*.env
+.env.*
+.venv/
+venv/
+dist/
+build/
+.cache/
+*.bak
+
+# FastAPI/uvicorn
+*.pid
+
+# Jupyter
+.ipynb_checkpoints
+
+# VSCode/IDE/editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.tar
+docker-compose.override.yml
+
+# Node/React
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.next/
+frontend/.env
+frontend/.env.*
+
+# Build artifacts
+*.js.map
+*.tsbuildinfo
+
+# Test/coverage
+.coverage
+htmlcov/
+coverage.xml
+pytest_cache/
+.nox/
+.tox/
+
+# Misc
+*.orig
+*.rej
+
+# Ignore compiled Playwright/Chromium browser cache
+playwright/.cache/
+
+# Ignore frontend build output
+frontend/build/
+frontend/.cache/
+
+# Ignore backend build output
+src/__pycache__/
+src/.pytest_cache/
+src/.mypy_cache/
+src/.ruff_cache/
+src/.coverage
+src/.env
+src/.env.*
+src/.venv/
+src/venv/
+src/dist/
+src/build/
+src/.ipynb_checkpoints
+
+# Ignore local docs output
+src/docs/_build/
+
+# Ignore lock files (optional, if you want to keep them out)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+# src/uv.lock
+
+# Ignore assets (optional, if you want to keep them out)
+# src/assets/
+# frontend/public/assets/

@@ -32,3 +32,42 @@ PocketFlow - Agent Framework
   "keywords": ["LLM SEO", "AI search"],
   "tone": "professional"
 }
+
+```
+CrawlWise
+├─ .cursor
+│  └─ rules
+├─ backend
+├─ Dockerfile
+├─ error.txt
+├─ README.md
+├─ requirements.txt
+└─ src
+   ├─ .clinerules
+   ├─ .cursorrules
+   ├─ .python-version
+   ├─ crawler.py
+   ├─ docs
+   │  ├─ design.md
+   │  └─ project.md
+   ├─ flow.py
+   ├─ index.css
+   ├─ main.py
+   ├─ main.tsx
+   ├─ nodes.py
+   ├─ pyproject.toml
+   ├─ README.md
+   ├─ utils
+   │  ├─ call_llm.py
+   │  ├─ __init__.py
+   │  └─ __pycache__
+   │     ├─ call_llm.cpython-311.pyc
+   │     └─ __init__.cpython-311.pyc
+   ├─ uv.lock
+   └─ __pycache__
+      ├─ crawler.cpython-311.pyc
+      ├─ flow.cpython-311.pyc
+      ├─ main.cpython-311.pyc
+      └─ nodes.cpython-311.pyc
+
+```
