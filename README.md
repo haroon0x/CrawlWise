@@ -29,8 +29,8 @@ CrawlWise is an end-to-end Generative Engine Optimization (GEO) agent system tha
 ## 🏗️ Architecture
 
 ```mermaid
-graph TD
-    A[User (Frontend)] -->|Submits URL| B[FastAPI Backend]
+flowchart TD
+    A[User (Frontend)] --> B[FastAPI Backend]
     B --> C[Crawl4AI Crawler]
     C --> D[Extracted Content & Metadata]
     D --> E[PocketFlow Agent Pipeline]
@@ -38,11 +38,11 @@ graph TD
     E --> G[Enhancement Node (LLM via AlchemystAI)]
     F --> H[Audit JSON]
     G --> I[Improvements JSON]
-    H & I --> J[API Response]
-    J -->|Display Results| A
-    F & G --> K[AlchemystAI LLM Proxy]
-    K -.->|LLM Calls| F
-    K -.->|LLM Calls| G
+    H --> J[API Response]
+    I --> J
+    J --> A
+    F -.-> K[AlchemystAI LLM Proxy]
+    G -.-> K
 ```
 
 ---
@@ -83,6 +83,25 @@ graph TD
    npm install
    npm run dev
    ```
+
+---
+
+## 🐳 Docker Deployment
+
+CrawlWise supports Docker for easy deployment and production use.
+
+1. **Build the Docker image:**
+   ```bash
+   docker build -t crawlwise .
+   ```
+2. **Run the container:**
+   ```bash
+   docker run -p 8000:8000 --env-file src/.env crawlwise
+   ```
+   - The backend will be available at `http://localhost:8000`.
+   - Make sure your `.env` file with `ALCHEMYST_API_KEY` is present and passed in.
+
+You can also deploy the frontend separately (e.g., on Netlify or Vercel) and point it to the backend API.
 
 ---
 
@@ -138,4 +157,15 @@ POST /api/v1/audit
   2. **AuditContentNode:** Audits content/metadata for SEO/GEO (via LLM).
   3. **GenerateEnhancementsNode:** Generates improved intro, meta, FAQ (via LLM).
 - All LLM calls are routed through the **AlchemystAI Proxy** for reliability and cost efficiency.
+
+---
+
+## 👥 Contributing
+- PRs and issues welcome!
+- See [PocketFlow](https://github.com/The-Pocket/PocketFlow) for agent framework docs and patterns.
+
+---
+
+## License
+MIT
 
