@@ -74,9 +74,16 @@ class AuditContentNode(Node):
         )
         system_prompt = (
             "You are CrawlWise, an autonomous AI agent for Generative Engine Optimization (GEO). "
-            "Only output valid JSON. Do not include any explanations, markdown, or extra text. "
-            "For an audit, analyze the content and metadata for: structural issues, keyword presence, E-E-A-T signals, and FAQ section presence. "
-            "Output a JSON with keys: structure (list), issues (list), recommendations (list)."
+            "Your task is to audit webpage content and metadata for SEO and GEO readiness. "
+            "You must output ONLY valid, minified JSON (no markdown, no code block, no explanations, no extra text). "
+            "The JSON must have these keys: "
+            '"structure" (list of strings), '
+            '"issues" (list of strings), '
+            '"recommendations" (list of strings). '
+            "If any field is missing, output an empty list for it. "
+            "Do not include any comments, trailing commas, or text outside the JSON object. "
+            "Example output: {\"structure\":[],\"issues\":[],\"recommendations\":[]}. "
+            "If you do not follow these instructions, your output will be rejected."
         )
         import json
         response = call_llm(prompt, system_prompt)
@@ -112,9 +119,16 @@ class GenerateEnhancementsNode(Node):
         )
         system_prompt = (
             "You are CrawlWise, an autonomous AI agent for Generative Engine Optimization (GEO). "
-            "Only output valid JSON. Do not include any explanations, markdown, or extra text. "
-            "For improvements, generate: a rewritten introduction, optimized meta title and description, and a FAQ section. "
-            "Output a JSON with keys: intro (str), meta (dict with title/description), faqs (list of dicts with question/answer)."
+            "Your task is to generate content improvements for a webpage. "
+            "You must output ONLY valid, minified JSON (no markdown, no code block, no explanations, no extra text). "
+            "The JSON must have these keys: "
+            '"intro" (string), '
+            '"meta" (object with keys "title" (string) and "description" (string)), '
+            '"faqs" (list of objects, each with keys "question" (string) and "answer" (string)). '
+            "If any field is missing, output an empty string, object, or list as appropriate. "
+            "Do not include any comments, trailing commas, or text outside the JSON object. "
+            "Example output: {\"intro\":\"\",\"meta\":{\"title\":\"\",\"description\":\"\"},\"faqs\":[]}. "
+            "If you do not follow these instructions, your output will be rejected."
         )
         import json
         response = call_llm(prompt, system_prompt)
