@@ -58,21 +58,6 @@ const Header: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="hidden md:flex items-center space-x-6">
-              <div className="flex items-center space-x-2 text-sm text-gray-400">
-                <Brain className="w-4 h-4 text-blue-400" />
-                <span>AI-Powered</span>
-              </div>
-              <div className="flex items-center space-x-2 text-sm text-gray-400">
-                <Zap className="w-4 h-4 text-yellow-400" />
-                <span>Real-time</span>
-              </div>
-              <div className="flex items-center space-x-2 text-sm text-gray-400">
-                <Target className="w-4 h-4 text-green-400" />
-                <span>GEO Optimized</span>
-              </div>
-            </div>
-            
             <div className="flex items-center space-x-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
               <div className={`w-2 h-2 rounded-full ${indicatorColor} ${online === true ? 'animate-pulse' : ''}`} />
               <span className="text-xs text-gray-300 font-medium">{indicatorText}</span>
