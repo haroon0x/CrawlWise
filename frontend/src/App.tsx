@@ -1,5 +1,5 @@
 /// <reference types="vite/client" />
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Header from './components/Header';
 import AuditForm from './components/AuditForm';
