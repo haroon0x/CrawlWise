@@ -17,6 +17,12 @@ CrawlWise is an end-to-end Generative Engine Optimization (GEO) agent system tha
 
 ---
 
+## 📽️ Demo
+<video src="https://github.com/user-attachments/assets/b723cf0f-2a08-4736-b409-0877423a32b0" width="600" controls></video>
+[Click here to watch the demo video](misc/demo/demo.mp4) if the playback does't work
+
+---
+
 ## 🛠️ Tech Stack
 
 - **Backend:** FastAPI, [PocketFlow](https://github.com/The-Pocket/PocketFlow), [Crawl4AI](https://pypi.org/project/crawl4ai/), [LangChain](https://python.langchain.com/), [AlchemystAI LLM Proxy](https://getalchemystai.com)
@@ -28,22 +34,25 @@ CrawlWise is an end-to-end Generative Engine Optimization (GEO) agent system tha
 
 ## 🏗️ Architecture
 
+
 ```mermaid
-graph TD
+flowchart TD
     A[User (Frontend)] -->|Submits URL| B[FastAPI Backend]
     B --> C[Crawl4AI Crawler]
     C --> D[Extracted Content & Metadata]
     D --> E[PocketFlow Agent Pipeline]
-    E --> F[Audit Node (LLM via AlchemystAI)]
-    E --> G[Enhancement Node (LLM via AlchemystAI)]
+    E --> F[Audit Node<br/>(LLM via AlchemystAI)]
+    E --> G[Enhancement Node<br/>(LLM via AlchemystAI)]
     F --> H[Audit JSON]
     G --> I[Improvements JSON]
-    H & I --> J[API Response]
+    H --> J[API Response]
+    I --> J
     J -->|Display Results| A
-    F & G --> K[AlchemystAI LLM Proxy]
-    K -.->|LLM Calls| F
-    K -.->|LLM Calls| G
+    F -.-> K[AlchemystAI LLM Proxy]
+    G -.-> K
 ```
+
+
 
 ---
 
