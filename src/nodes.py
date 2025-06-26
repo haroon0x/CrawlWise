@@ -2,6 +2,7 @@ from pocketflow import Node
 from utils.call_llm import call_llm
 import asyncio
 from crawler import crawl
+import re
 
 # Helper to run async code from sync context, even if already in an event loop
 def run_async(coro):
@@ -21,6 +22,18 @@ def run_async(coro):
         return result[0]
     else:
         return asyncio.run(coro)
+
+def extract_json_from_response(response: str) -> str:
+    # Remove markdown code block if present
+    match = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", response, re.DOTALL)
+    if match:
+        return match.group(1)
+    # Fallback: try to find the first { ... }
+    start = response.find('{')
+    end = response.rfind('}')
+    if start != -1 and end != -1 and end > start:
+        return response[start:end+1]
+    return response  # as-is
 
 class CrawlExtractNode(Node):
     def prep(self, shared):
@@ -67,7 +80,9 @@ class AuditContentNode(Node):
         )
         import json
         response = call_llm(prompt, system_prompt)
-        return json.loads(response)
+        print("LLM RAW RESPONSE:", response)
+        json_str = extract_json_from_response(response)
+        return json.loads(json_str)
 
     def post(self, shared, prep_res, exec_res):
         shared["audit"] = exec_res
@@ -103,7 +118,9 @@ class GenerateEnhancementsNode(Node):
         )
         import json
         response = call_llm(prompt, system_prompt)
-        return json.loads(response)
+        print("LLM RAW RESPONSE:", response)
+        json_str = extract_json_from_response(response)
+        return json.loads(json_str)
 
     def post(self, shared, prep_res, exec_res):
         shared["improvements"] = exec_res
