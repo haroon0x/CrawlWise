@@ -7,7 +7,7 @@ import ResultsDisplay from './components/ResultsDisplay';
 import LoadingState from './components/LoadingState';
 import { AuditRequest, AuditResponse } from './types';
 
-const API_URL = import.meta.env.VITE_API_URL || '/api/v1/audit';
+const API_URL = import.meta.env.VITE_API_URL || 'https://crawlwise.onrender.com/api/v1/audit';
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);

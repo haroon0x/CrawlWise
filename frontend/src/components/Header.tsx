@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Zap, Target, Brain } from 'lucide-react';
 
-const BACKEND_URL = '/health';
+const BACKEND_URL = import.meta.env.VITE_HEALTH_URL || 'https://crawlwise.onrender.com/health';
 
 const Header: React.FC = () => {
   const [online, setOnline] = useState<boolean | null>(null);
