@@ -10,7 +10,7 @@ app = FastAPI()
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "*"],  # Allow frontend dev and all for dev
+    allow_origins=["https://crawlwise.netlify.app", "*"],  # Allow frontend dev and all for dev
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
