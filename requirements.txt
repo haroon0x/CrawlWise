@@ -4,3 +4,4 @@ fastapi>=0.115.13
 uvicorn[standard]
 requests
 beautifulsoup4
+langchain[openai]>=0.3.26
