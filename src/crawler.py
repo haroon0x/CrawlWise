@@ -1,10 +1,4 @@
 import asyncio
-import sys
-
-# This needs to be at the top of the file, before any other asyncio imports
-if sys.platform == "win32":
-    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-
 from crawl4ai import *
 from bs4 import BeautifulSoup
 
@@ -29,8 +23,9 @@ async def crawl(url: str):
         return {"markdown": markdown, "meta": meta}
 
 if __name__ == "__main__":
+    import sys
     url = sys.argv[1] if len(sys.argv) > 1 else None
     if url:
         print(asyncio.run(crawl(url)))
     else:
-        print("Usage: python crawler.py <url>")
+        print("Usage: python crawler.py <url>")tr
