@@ -59,8 +59,14 @@ class AuditContentNode(Node):
             "- FAQ section presence\n\n"
             "Return a JSON with keys: structure (list), issues (list), recommendations (list)."
         )
-        response = call_llm(prompt)
+        system_prompt = (
+            "You are CrawlWise, an autonomous AI agent for Generative Engine Optimization (GEO). "
+            "Only output valid JSON. Do not include any explanations, markdown, or extra text. "
+            "For an audit, analyze the content and metadata for: structural issues, keyword presence, E-E-A-T signals, and FAQ section presence. "
+            "Output a JSON with keys: structure (list), issues (list), recommendations (list)."
+        )
         import json
+        response = call_llm(prompt, system_prompt)
         return json.loads(response)
 
     def post(self, shared, prep_res, exec_res):
@@ -89,8 +95,14 @@ class GenerateEnhancementsNode(Node):
             f"Content (Markdown):\n{fit_markdown}\n\nAudit: {audit}\n\nKeywords: {keywords}\n\n"
             "Return a JSON with keys: intro (str), meta (dict with title/description), faqs (list of dicts with question/answer)."
         )
-        response = call_llm(prompt)
+        system_prompt = (
+            "You are CrawlWise, an autonomous AI agent for Generative Engine Optimization (GEO). "
+            "Only output valid JSON. Do not include any explanations, markdown, or extra text. "
+            "For improvements, generate: a rewritten introduction, optimized meta title and description, and a FAQ section. "
+            "Output a JSON with keys: intro (str), meta (dict with title/description), faqs (list of dicts with question/answer)."
+        )
         import json
+        response = call_llm(prompt, system_prompt)
         return json.loads(response)
 
     def post(self, shared, prep_res, exec_res):
