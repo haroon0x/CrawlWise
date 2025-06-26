@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Zap, Target, Brain } from 'lucide-react';
 
 const BACKEND_URL = import.meta.env.VITE_HEALTH_URL || 'https://crawlwise.onrender.com/health';
 
@@ -58,6 +57,12 @@ const Header: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
+            {/* Powered by Alchemyst AI badge */}
+            <div className="hidden md:flex items-center space-x-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-300 font-medium">
+              <span>Powered by</span>
+              <span className="font-bold text-blue-400">Alchemyst AI</span>
+            </div>
+            {/* Status Indicator */}
             <div className="flex items-center space-x-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10">
               <div className={`w-2 h-2 rounded-full ${indicatorColor} ${online === true ? 'animate-pulse' : ''}`} />
               <span className="text-xs text-gray-300 font-medium">{indicatorText}</span>
